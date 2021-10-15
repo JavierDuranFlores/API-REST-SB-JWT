@@ -3,9 +3,12 @@ package mx.unach.Inmobiliariatap.persistence;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 import mx.unach.Inmobiliariatap.persistence.crud.InmuebleCrudRepository;
 import mx.unach.Inmobiliariatap.persistence.entity.Inmueble;
 
+@Repository
 public class InmuebleRepository {
 	
 	private InmuebleCrudRepository inmuebleCrudRepository;
