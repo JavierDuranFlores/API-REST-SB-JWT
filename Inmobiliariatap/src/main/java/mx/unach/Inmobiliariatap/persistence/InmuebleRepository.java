@@ -27,17 +27,7 @@ public class InmuebleRepository {
     }
 
     public Inmueble addInmueble(Inmueble inmueble) {
-        Inmueble nuevo = Inmueble.builder()
-        					     .idcliente(inmueble.getIdcliente())
-        					     .municipio(inmueble.getMunicipio())
-        					     .colonia(inmueble.getColonia())
-        					     .codigopostal(inmueble.getCodigopostal())
-        					     .precio(inmueble.getPrecio())
-        					     .imagen(inmueble.getImagen())
-        					     .build();
-
-        		
-        return inmuebleCrudRepository.save(nuevo);
+        return inmuebleCrudRepository.save(inmueble);
     }
 
 }
