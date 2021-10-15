@@ -27,7 +27,7 @@ public class Inmueble implements Serializable {
 	@Id
     @Column(name="idc")
 	@Getter @Setter
-    private String idcliente;
+    private String idCliente;
 
     @Column(name="municipio")
     @Getter @Setter
