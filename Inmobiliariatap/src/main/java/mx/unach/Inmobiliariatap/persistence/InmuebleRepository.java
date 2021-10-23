@@ -40,7 +40,7 @@ public class InmuebleRepository implements BuildingRepository{
 
     @Override
     public int deleteBuilding(String id) {
-        return inmuebleCrudRepository.deleteByIdcliente(id);
+        return inmuebleCrudRepository.deleteByIdCliente(id);
     }
 
 	@Override

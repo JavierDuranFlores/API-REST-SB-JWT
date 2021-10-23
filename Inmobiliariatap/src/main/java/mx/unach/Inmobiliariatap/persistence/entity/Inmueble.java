@@ -15,15 +15,16 @@ import lombok.ToString;
 
 @Entity
 @Table(name="inmuebles")
-@Builder
-@ToString	
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Inmueble implements Serializable {
 
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
     @Column(name="idc")
 	@Getter @Setter
@@ -48,5 +49,6 @@ public class Inmueble implements Serializable {
     @Column(name="imagen")
     @Getter @Setter
     private String imagen;
+    
     
 }
