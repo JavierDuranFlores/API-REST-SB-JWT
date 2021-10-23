@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
 import mx.unach.Inmobiliariatap.domain.Building;
 import mx.unach.Inmobiliariatap.domain.service.BuildingService;
 
@@ -28,17 +31,25 @@ public class BuildingController {
 	private BuildingService buildingService;
 	
 	@GetMapping(path="/buildings", produces={"application/json"})
+	@ApiOperation("Get all buildings")
+	@ApiResponse(code = 200, message = "OK")
 	public List<Building> getBuildings() { 
 		return buildingService.listAllBuildings();
 	}
 	
 	@GetMapping(path="/buildings/{id}", produces={"application/json"})
-	public Optional<Building> getBuilding(@PathVariable String id) {
+	@ApiOperation("Search a buildings with an ID")
+	@ApiResponse(code = 200, message = "OK")
+	public Optional<Building> getBuilding(@ApiParam(value = "The id of the building", required = true, example = "C310") 
+										  @PathVariable String id) {
 		return buildingService.findByIdBuilding(id);
 	}
 
 	@PutMapping(path="/buildings/{id}", produces={"application/json"})
-	public Building updateInmueble(@RequestBody Building building, @PathVariable String id) {
+	@ApiOperation("Update building with an ID")
+	@ApiResponse(code = 200, message = "OK")
+	public Building updateInmueble(@ApiParam(value = "The information of the building to update", required = true) @RequestBody Building building, 
+			@ApiParam(value = "The id of the building", required = true, example = "C310") @PathVariable String id) {
 		Optional<Building> update = buildingService.findByIdBuilding(id);
 		
 		update.get().setMunicipality(building.getMunicipality());
@@ -51,12 +62,14 @@ public class BuildingController {
 	}
 
 	@DeleteMapping(path="/buildings/{id}", produces={"application/json"})
-	public int deteleBuilding(@PathVariable String id) {
+	@ApiOperation("Delete building with an ID")
+	public int deteleBuilding(@ApiParam(value = "The id of the building", required = true, example = "C321") @PathVariable String id) {
 		return buildingService.deleteBuilding(id);
 	}
 
 	@PostMapping(path="/buildings", produces={"application/json"})
-	public Building createBuilding(@RequestBody Building building) {
+	@ApiOperation("Creates a new building")
+	public Building createBuilding(@ApiParam(value = "The information of the new building", required = true) @RequestBody Building building) {
 		return buildingService.addBuilding(building);
 	}
 	
