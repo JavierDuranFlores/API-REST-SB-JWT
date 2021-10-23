@@ -3,34 +3,49 @@ package mx.unach.Inmobiliariatap.persistence;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import mx.unach.Inmobiliariatap.domain.Building;
+import mx.unach.Inmobiliariatap.domain.repository.BuildingRepository;
 import mx.unach.Inmobiliariatap.persistence.crud.InmuebleCrudRepository;
 import mx.unach.Inmobiliariatap.persistence.entity.Inmueble;
+import mx.unach.Inmobiliariatap.persistence.mapper.BuildingMapper;
 
 @Repository
-public class InmuebleRepository {
+public class InmuebleRepository implements BuildingRepository{
 	
+	@Autowired
+	@Qualifier("inmuebleCrudRepository")
 	private InmuebleCrudRepository inmuebleCrudRepository;
 	
-    public List<Inmueble> listAllInmuebles() {
-        return (List<Inmueble>) inmuebleCrudRepository.findAll();
+	@Autowired
+	private BuildingMapper mapper;
+	
+	@Override
+    public List<Building> listAllBuildings() {
+        return mapper.toBuildings((List<Inmueble>) inmuebleCrudRepository.findAll());
     }
     
-    public Optional<Inmueble> findByIdInmueble(String id) {
-        return inmuebleCrudRepository.findById(id);
+    @Override
+    public Optional<Building> findByIdBuilding(String id) {
+        return inmuebleCrudRepository.findById(id).map(producto -> mapper.toBuilding(producto));
     }
 
-    public Inmueble updateInmueble(Inmueble inmueble) {
-        return inmuebleCrudRepository.save(inmueble);
-    }
+    @Override
+	public Building updateBuilding(Building building) {
+		return mapper.toBuilding(inmuebleCrudRepository.save(mapper.toInmueble(building)));
+	}
 
-    public int deleteInmueble(String id) {
+    @Override
+    public int deleteBuilding(String id) {
         return inmuebleCrudRepository.deleteByIdcliente(id);
     }
 
-    public Inmueble addInmueble(Inmueble inmueble) {
-        return inmuebleCrudRepository.save(inmueble);
-    }
+	@Override
+	public Building addBuilding(Building building) {
+		return mapper.toBuilding(inmuebleCrudRepository.save(mapper.toInmueble(building)));
+	}
 
 }
