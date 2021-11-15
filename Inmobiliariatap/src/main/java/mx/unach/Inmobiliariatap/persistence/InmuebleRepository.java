@@ -39,8 +39,8 @@ public class InmuebleRepository implements BuildingRepository{
 	}
 
     @Override
-    public int deleteBuilding(String id) {
-        return inmuebleCrudRepository.deleteByIdCliente(id);
+    public void deleteBuilding(String id) {
+        inmuebleCrudRepository.deleteByIdCliente(id);
     }
 
 	@Override

@@ -8,6 +8,6 @@ import mx.unach.Inmobiliariatap.persistence.entity.Inmueble;
 @Repository("inmuebleCrudRepository")
 public interface InmuebleCrudRepository extends CrudRepository<Inmueble, String>{
 
-	int deleteByIdCliente(String id);
+	void deleteByIdCliente(String id);
 	
 }

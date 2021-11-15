@@ -30,8 +30,11 @@ public class BuildingService {
 		return buildingRepository.updateBuilding(building);
 	}
 	
-	 public int deleteBuilding(String id) {
-		 return buildingRepository.deleteBuilding(id);
+	 public boolean deleteBuilding(String id) {
+		 return findByIdBuilding(id).map(building -> {
+			 buildingRepository.deleteBuilding(id);
+			 return true;
+		 }).orElse(false);
 	 }
 	 
 	 public Building addBuilding(Building building) {

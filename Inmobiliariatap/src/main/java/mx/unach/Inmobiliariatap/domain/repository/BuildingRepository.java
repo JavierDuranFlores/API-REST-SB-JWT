@@ -13,7 +13,7 @@ public interface BuildingRepository {
 	
 	public abstract Building updateBuilding(Building building);
 		
-	public abstract int deleteBuilding(String id);
+	public abstract void deleteBuilding(String id);
 	
 	public abstract Building addBuilding(Building building);
 
